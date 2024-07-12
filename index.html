@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis On Green IT Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #333;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #cccccc;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444444;
+            overflow-x: auto;
+        }
+        code {
+            color: #dcdcaa;
+        }
+        .comment {
+            color: #6a9955;
+        }
+        .keyword {
+            color: #569cd6;
+        }
+        .string {
+            color: #ce9178;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-green">
+        <h1>Tracarbon: Track Your Device's Energy Consumption and Calculate Carbon Emissions</h1>
+
+        <h2>Overview</h2>
+
+        <p><strong>Tracarbon</strong> is a Python library designed to track device energy consumption and calculate carbon emissions based on real-time data. It offers developers a simple yet powerful toolset to monitor and analyze the environmental impact of their software applications. By leveraging system-level metrics and integrating with environmental data sources, Tracarbon provides insights into the carbon footprint associated with computational tasks.</p>
+
+        <h3>Key Features</h3>
+        <ul>
+            <li><strong>Real-Time Monitoring</strong>: Track energy consumption metrics in real-time using system-level interfaces like RAPL (Running Average Power Limit).</li>
+            <li><strong>Carbon Emission Calculations</strong>: Calculate carbon emissions associated with energy consumption using live CO2 intensity data from sources like CO2Signal.</li>
+            <li><strong>Integration</strong>: Easily integrate Tracarbon into existing Python projects to monitor and analyze energy usage patterns.</li>
+        </ul>
+
+        <h3>Purpose</h3>
+        <p>The primary purpose of Tracarbon is to empower developers and organizations to make informed decisions regarding energy-efficient software development. By quantifying the environmental impact of computational tasks, Tracarbon enables proactive measures to reduce carbon emissions and promote sustainable computing practices.</p>
+
+        <h3>Why It's Useful</h3>
+        <ul>
+            <li><strong>Environmental Accountability</strong>: Provides developers with the tools to understand and mitigate the environmental impact of their code.</li>
+            <li><strong>Optimization Insights</strong>: Identifies energy-intensive processes and encourages optimization strategies for improved efficiency.</li>
+            <li><strong>Compliance and Reporting</strong>: Supports compliance with environmental regulations and facilitates reporting on carbon footprint metrics.</li>
+        </ul>
+        <p>Tracarbon strives to bridge the gap between software development and environmental responsibility, fostering a more sustainable approach to technology innovation.</p>
+
+        <h2>Install Tracarbon</h2>
+
+        <p>You can install Tracarbon and optional exporters using <code>pip</code>. Here are the installation commands:</p>
+
+        <h3>Install Tracarbon</h3>
+        <p>Install the core Tracarbon library:</p>
+        <pre><code>pip install tracarbon</code></pre>
+
+        <h3>Install Optional Exporters</h3>
+        <p>Tracarbon supports various exporters like Datadog, Prometheus, and Kubernetes. You can install them along with Tracarbon using extras:</p>
+        <pre><code>pip install 'tracarbon[datadog,prometheus,kubernetes]'</code></pre>
+
+        <h2>Exporters</h2>
+
+        <p>Exporters in Tracarbon allow you to send your energy consumption and carbon emission metrics to various output formats and monitoring tools. Here's a detailed look at the available exporters:</p>
+
+        <h3>Stdout</h3>
+        <ul>
+            <li><strong>Description</strong>: Prints the metrics directly to the standard output (console).</li>
+            <li><strong>Use Case</strong>: Useful for quick debugging and local development to see the metrics immediately without any additional setup.</li>
+            <li><strong>Configuration</strong>: No additional configuration is required. Simply run Tracarbon, and the metrics will be printed to the console.</li>
+        </ul>
+
+        <h3>JSON</h3>
+        <ul>
+            <li><strong>Description</strong>: Writes the metrics to a JSON file.</li>
+            <li><strong>Use Case</strong>: Ideal for scenarios where you need to store the metrics in a structured format for further analysis or processing.</li>
+            <li><strong>Configuration</strong>: Specify the file path where the JSON file should be saved.</li>
+        </ul>
+
+        <h3>Prometheus</h3>
+        <ul>
+            <li><strong>Description</strong>: Sends the metrics to a Prometheus server.</li>
+            <li><strong>Use Case</strong>: Suitable for environments where Prometheus is used for monitoring and alerting. This allows you to integrate your device's energy consumption and carbon emission metrics into your existing monitoring setup.</li>
+            <li><strong>Configuration</strong>: Specify the URL of the Prometheus Push Gateway.</li>
+        </ul>
+
+        <h3>Datadog</h3>
+        <ul>
+            <li><strong>Description</strong>: Sends the metrics to Datadog.</li>
+            <li><strong>Use Case</strong>: Useful for users who leverage Datadog for infrastructure monitoring and performance metrics. This exporter allows you to visualize and analyze your energy consumption data alongside other metrics in Datadog.</li>
+            <li><strong>Configuration</strong>:
+                <ul>
+                    <li><strong>Datadog API Key</strong>: Set the Datadog API key as an environment variable.</li>
+                    <li><strong>Datadog Site</strong>: Specify the Datadog site (datadoghq.com).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>Usage</h2>
+
+        <p>Tracarbon provides flexibility in how you can track device energy consumption and calculate carbon emissions. You can use it via the command line interface (CLI) or integrate it programmatically into your Python projects.</p>
+        
+        <h3>Command-Line Interface (CLI)</h3>
+        <ul>
+            <li><strong>Basic Usage</strong>
+                <ul>
+                    <li><strong>Run Tracarbon CLI with default settings</strong>:
+                        <p>To start tracking energy consumption and carbon emissions using the default Stdout exporter and CO2 Signal API (requires API key):</p>
+                        <pre><code>TRACARBON_CO2SIGNAL_API_KEY=API_KEY tracarbon run</code></pre>
+                    </li>
+                    <li><strong>Run Tracarbon CLI without the CO2 Signal API</strong>:
+                        <p>To run Tracarbon with the default stdout exporter, which prints metrics directly to the console, without requiring a CO2 Signal API key:</p>
+                        <pre><code>tracarbon run</code></pre>
+                    </li>
+                    <li><strong>Specify a location with country code (ISO 3166-1 alpha-2 format)</strong>:
+                        <p>To specify a location other than the default global setting:</p>
+                        <pre><code>tracarbon run --country-code-alpha-iso-2 fr</code></pre>
+                        <p>Replace <strong>fr</strong> with the desired country code.</p>
+                    </li>
+                    <li><strong>Use a specific exporter like Datadog</strong>:
+                        <p>To send metrics to Datadog, configure Tracarbon with Datadog API and application keys:</p>
+                        <pre><code>TRACARBON_CO2SIGNAL_API_KEY=API_KEY DATADOG_API_KEY=DATADOG_API_KEY DATADOG_APP_KEY=DATADOG_APP_KEY tracarbon run --exporter-name Datadog</code></pre>
+                        <p>Adjust with your actual API and app keys.</p>
+                    </li>
+                    <li><strong>Running Tracarbon CLI on Linux Hardware with Kubernetes, Sending Metrics to Prometheus</strong>:
+                        <p>To run Tracarbon CLI on Linux hardware within a Kubernetes environment and send the metrics to Prometheus:</p>
+                        <pre><code>tracarbon run --exporter-name Prometheus --containers</code></pre>
+                    </li>
+                </ul>
+            </li>
+            <li><strong>Programmatically Integrate Tracarbon</strong>
+                <ul>
+                    <li><strong>Using Tracarbon in Python projects</strong>:
+                        <p>Import Tracarbon modules and configure it programmatically:</p>
+                        <pre><code>from tracarbon import TracarbonBuilder, TracarbonConfiguration
+
+configuration = TracarbonConfiguration(co2signal_api_key="API_KEY")  <span class="comment"># Your configuration</span>
+tracarbon = TracarbonBuilder(configuration=configuration).build()
+tracarbon.start()
+<span class="comment"># Your code</span>
+tracarbon.stop()
+
+with tracarbon:
+<span class="comment"># Your code</span>
+
+report = tracarbon.report <span class="comment"># Get the report</span></code></pre>
+                    </li>
+                    <li><strong>Custom Metrics and Exporters</strong>:
+                        <p>Customize Tracarbon by defining custom metrics and exporters:</p>
+                        <pre><code>from tracarbon import TracarbonBuilder, TracarbonConfiguration
+from tracarbon.exporters import StdoutExporter
+from tracarbon.general_metrics import CarbonEmissionGenerator, EnergyConsumptionGenerator
+
+configuration = TracarbonConfiguration(co2signal_api_key="API_KEY")  <span class="comment"># Your configuration</span>
+metric_generators = [EnergyConsumptionGenerator(), CarbonEmissionGenerator()]
+exporter = StdoutExporter(metric_generators=metric_generators) <span class="comment"># Your exporter</span>
+tracarbon = TracarbonBuilder(configuration=configuration).with_exporter(exporter=exporter).build()
+tracarbon.start()
+<span class="comment"># Your code</span>
+tracarbon.stop()
+
+with tracarbon:
+<span class="comment"># Your code</span>
+
+report = tracarbon.report <span class="comment"># Get the report</span></code></pre>
+                    </li>
+                    <li><strong>Custom Configuration</strong>:
+                        <p>Create a custom configuration for specific needs:</p>
+                        <pre><code>from tracarbon import TracarbonBuilder, TracarbonConfiguration
+from tracarbon.exporters import StdoutExporter, MetricGenerator, Metric, Tag
+from tracarbon.emissions import CarbonEmission
+
+configuration = TracarbonConfiguration(co2signal_api_key="API_KEY")  <span class="comment"># Your configuration</span>
+metric_generators = [MetricGenerator(metrics=[Metric(name="custom_metric", value=CustomClass().run, tags=[Tag(key="key", value="value")])])]  <span class="comment"># Your custom metrics</span>
+exporter = StdoutExporter(metric_generators=metric_generators) <span class="comment"># Your exporter</span>
+tracarbon = TracarbonBuilder(configuration=configuration).with_exporter(exporter=exporter).build()
+tracarbon.start()
+<span class="comment"># Your code</span>
+tracarbon.stop()
+
+with tracarbon:
+<span class="comment"># Your code</span>
+
+report = tracarbon.report <span class="comment"># Get the report</span></code></pre>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p>Integrate Tracarbon into your Python applications to monitor energy usage and carbon emissions. Utilize its flexibility to adapt to different environments and requirements, whether for command-line monitoring or seamless integration into existing projects.</p>
+        <p>For additional configuration options and more detailed instructions, please visit the <a href="https://github.com/fvaleye/tracarbon">Tracarbon GitHub repository</a>.</p>
+    </div>
+</body>
+</html>
